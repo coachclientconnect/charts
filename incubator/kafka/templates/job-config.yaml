@@ -12,6 +12,10 @@ spec:
     metadata:
       labels:
       {{- include "kafka.config.matchLabels" . | nindent 8 }}
+{{- if .Values.configJob.podAnnotations }}
+      annotations:
+{{ toYaml .Values.configJob.podAnnotations | indent 8 }}
+{{- end }}
     spec:
       restartPolicy: OnFailure
       volumes:
