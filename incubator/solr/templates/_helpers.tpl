@@ -49,7 +49,7 @@ Define the name of the solr exporter
 The name of the zookeeper service
 */}}
 {{- define "solr.zookeeper-name" -}}
-{{- printf "%s-%s" .Release.Name "zookeeper" | trunc 63 | trimSuffix "-" -}}
+{{- .Values.zookeeper.service.name | default (printf "%s-%s" .Release.Name "zookeeper") | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
