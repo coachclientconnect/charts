@@ -49,14 +49,26 @@ Define the name of the solr exporter
 The name of the zookeeper service
 */}}
 {{- define "solr.zookeeper-name" -}}
-{{- .Values.zookeeper.service.name | default (printf "%s-%s" .Release.Name "zookeeper") | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.zookeeper.enabled -}}
+{{- (printf "%s-%s" .Release.Name "zookeeper") | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- .Values.zookeeper.host | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
 The name of the zookeeper headless service
 */}}
 {{- define "solr.zookeeper-service-name" -}}
-{{ printf "%s-%s" (include "solr.zookeeper-name" .) "headless" | trunc 63 | trimSuffix "-"  }}
+{{- printf "%s-%s" (include "solr.zookeeper-name" .) "headless" | trunc 63 | trimSuffix "-"  }}
+{{- end -}}
+
+{{/*
+The zookeeper url, including port and chroot
+*/}}
+{{- define "solr.zookeeper-service-url" -}}
+{{- $port := .Values.zookeeper.port | toString }}
+{{- printf "%s:%s%s" (include "solr.zookeeper-service-name" .) $port .Values.zookeeper.chroot }}
 {{- end -}}
 
 {{/*

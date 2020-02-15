@@ -41,7 +41,7 @@ spec:
             - /bin/bash
             - -o
             - pipefail
-            - -euc
+            - -eucx
   {{- $port := .Values.service.ports.client.port }}
             - >
               sleep 15;

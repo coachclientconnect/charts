@@ -39,14 +39,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 
 {{/*
 Form the Zookeeper URL. If zookeeper is installed as part of this chart, use k8s service discovery,
-else use user-provided URL
+else use user-provided URL plus port and path
 */}}
 {{- define "zookeeper.url" }}
 {{- $port := .Values.zookeeper.port | toString }}
 {{- if .Values.zookeeper.enabled -}}
-{{- printf "%s:%s" (include "kafka.zookeeper.fullname" .) $port }}
+{{- printf "%s:%s%s" (include "kafka.zookeeper.fullname" .) $port .Values.zookeeper.chroot }}
 {{- else -}}
-{{- $zookeeperConnect := printf "%s:%s" .Values.zookeeper.url $port }}
+{{- $zookeeperConnect := printf "%s:%s%s" .Values.zookeeper.url $port .Values.zookeeper.chroot }}
 {{- $zookeeperConnectOverride := index .Values "configurationOverrides" "zookeeper.connect" }}
 {{- default $zookeeperConnect $zookeeperConnectOverride }}
 {{- end -}}

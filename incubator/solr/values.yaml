@@ -106,7 +106,10 @@ exporter:
 
 zookeeper:
   enabled: true
-  service:
-    name: ""
+
+  # if zookeeper is not enabled, then use the following to connect ot an external zookeeper service by host, port, path
+  host: ""
+  port: 2181
+  chroot: ""
      
 
