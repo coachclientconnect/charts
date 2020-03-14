@@ -84,12 +84,12 @@ spec:
               exit 1;
         - name: "cp-solr-xml"
           image: busybox:latest
-          command: ['sh', '-c', 'cp /tmp-config-source/solr.xml /tmp-config/solr.xml']
+          command: ['sh', '-c', 'cp /opt/solr/server/tmp/solr.xml /opt/solr/server/home/solr.xml']
           volumeMounts:
             - name: "solr-xml"
-              mountPath: "/tmp-config-source"
+              mountPath: "/opt/solr/server/tmp"
             - name: "{{ include "solr.pvc-name" . }}"
-              mountPath: "/tmp-config"
+              mountPath: "/opt/solr/server/home"
 
 {{- if .Values.tls.enabled }}
         - name: "setup-keystore-and-properties"
