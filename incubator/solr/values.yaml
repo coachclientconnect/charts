@@ -106,10 +106,9 @@ exporter:
 
 zookeeper:
   enabled: true
-
-  # if zookeeper is not enabled, then use the following to connect ot an external zookeeper service by host, port, path
-  host: ""
   port: 2181
-  chroot: ""
+  # these next two override the default inferred headless service url and connect urls, if specified
+  headless: null
+  connect: null
      
 

@@ -60,15 +60,23 @@ The name of the zookeeper service
 The name of the zookeeper headless service
 */}}
 {{- define "solr.zookeeper-service-name" -}}
+{{- if .Values.zookeeper.headless -}}
+{{ .Values.zookeeper.headless }}
+{{- else -}}
 {{- printf "%s-%s" (include "solr.zookeeper-name" .) "headless" | trunc 63 | trimSuffix "-"  }}
+{{- end -}}
 {{- end -}}
 
 {{/*
-The zookeeper url, including port and chroot
+The zookeeper url
 */}}
 {{- define "solr.zookeeper-service-url" -}}
+{{- if .Values.zookeeper.url -}}
+{{ .Values.zookeeper.url }}
+{{- else -}}
 {{- $port := .Values.zookeeper.port | toString }}
-{{- printf "%s:%s%s" (include "solr.zookeeper-service-name" .) $port .Values.zookeeper.chroot }}
+{{- printf "%s:%s" (include "solr.zookeeper-service-name" .) $port }}
+{{- end -}}
 {{- end -}}
 
 {{/*
