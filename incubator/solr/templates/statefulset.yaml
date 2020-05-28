@@ -55,6 +55,7 @@ spec:
               - key: solr.xml
                 path: solr.xml
       initContainers:
+{{- if .Values.zookeeper.leaderCheck.enabled -}}
         - name: check-zk
           image: busybox:latest
           command:
@@ -82,6 +83,7 @@ spec:
               done;
               echo "Did NOT see a ZK leader after 240 secs!";
               exit 1;
+{{- end  }}
         - name: "cp-solr-xml"
           image: busybox:latest
           command: ['sh', '-c', 'cp /opt/solr/server/tmp/solr.xml /opt/solr/server/home/solr.xml']

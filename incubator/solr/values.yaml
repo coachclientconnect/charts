@@ -108,8 +108,12 @@ zookeeper:
   enabled: true
   host: null
   port: 2181
+  leaderCheck:
+    enabled: true
+    
   # these next two override the default inferred headless service url and connect urls, if specified
   headless: null
   url: null
+
      
 
