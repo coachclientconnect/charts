@@ -106,9 +106,10 @@ exporter:
 
 zookeeper:
   enabled: true
+  host: null
   port: 2181
   # these next two override the default inferred headless service url and connect urls, if specified
   headless: null
-  connect: null
+  url: null
      
 
