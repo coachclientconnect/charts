@@ -36,8 +36,11 @@ memcached:
   extraArgs: []
 
 ## Define various attributes of the service
-serviceAnnotations: {}
-#  prometheus.io/scrape: "true"
+service:
+  type: ClusterIP
+  clusterIP: None
+  annotations: {}
+  #  prometheus.io/scrape: "true"
 
 ## StatefulSet or Deployment
 kind: StatefulSet

@@ -9,9 +9,10 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
   annotations:
-{{ toYaml .Values.serviceAnnotations | indent 4 }}
+{{ toYaml .Values.service.annotations | indent 4 }}
 spec:
-  clusterIP: None
+  type: "{{ .Values.service.type }}"
+  clusterIP: "{{ .Values.service.clusterIP }}"
   ports:
   - name: memcache
     port: 11211
