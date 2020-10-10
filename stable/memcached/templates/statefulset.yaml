@@ -127,8 +127,10 @@ spec:
       affinity:
 {{ toYaml . | trim | indent 8}}
 {{- end }}
+{{- if eq .Values.kind "StatefulSet" }}
   updateStrategy:
     type: {{ .Values.updateStrategy.type }}
     {{- if (eq "Recreate" .Values.updateStrategy.type) }}
     rollingUpdate: null
     {{- end }}
+{{- end }}

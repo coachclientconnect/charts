@@ -38,7 +38,7 @@ memcached:
 ## Define various attributes of the service
 service:
   type: ClusterIP
-  clusterIP: None
+  # clusterIP: None
   annotations: {}
   #  prometheus.io/scrape: "true"
 
